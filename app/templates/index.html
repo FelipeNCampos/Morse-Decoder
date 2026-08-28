@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Decodificador Morse{% endblock %}
+
+{% block content %}
+<main class="container py-5">
+  <div class="row g-4 justify-content-center">
+    <header class="col-12 text-center mb-2">
+      <h1 class="display-5">Decodificador Morse</h1>
+      <p class="text-secondary mb-0">Use <code>/</code> para separar palavras em código Morse.</p>
+    </header>
+
+    {% if error %}
+      <div class="col-12">
+        <div class="alert alert-danger" role="alert">{{ error }}</div>
+      </div>
+    {% endif %}
+
+    <section class="col-12 col-lg-6">
+      <form class="d-grid gap-3" action="{{ url_for('main.index') }}" method="post">
+        <input type="hidden" name="operation" value="encode">
+        <label class="form-label fw-bold mb-0" for="texto">Texto</label>
+        <textarea class="form-control" id="texto" name="texto" rows="8" placeholder="Digite o texto aqui">{{ texto }}</textarea>
+        <button class="btn btn-primary" type="submit">Codificar</button>
+      </form>
+    </section>
+
+    <section class="col-12 col-lg-6">
+      <form class="d-grid gap-3" action="{{ url_for('main.index') }}" method="post">
+        <input type="hidden" name="operation" value="decode">
+        <label class="form-label fw-bold mb-0" for="morse">Código Morse</label>
+        <textarea class="form-control" id="morse" name="morse" rows="8" placeholder="Digite o código Morse aqui">{{ morse }}</textarea>
+        <button class="btn btn-primary" type="submit">Decodificar</button>
+      </form>
+    </section>
+  </div>
+</main>
+{% endblock %}
